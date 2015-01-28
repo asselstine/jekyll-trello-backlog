@@ -19,7 +19,7 @@
 
         <h6>{{site.data.board.dateLastActivity}}</h6>
         <h1>{{ list.name }}</h1>
-        {% assign mycards = cards | where:'idList',list.id %}
+        {% assign mycards = cards | where:'idList',list.id | where:'closed',false %}
         {% for card in mycards %}
         {% include card.html %}
         {% endfor %}
