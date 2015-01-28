@@ -1,0 +1,33 @@
+<h2>{{card.name }}</h2>
+<h5>{% for label in card.labels %}
+  <span class='label {{label.color}}'>
+    {% if label.name != '' %}
+    {{label.name}}
+    {% else %}
+    &nbsp;&nbsp;
+    {% endif %}
+  </span>
+  {% endfor %}</h5>
+
+{% if card.desc %}
+<p>
+  {{card.desc | markdownify }}
+</p>
+{% endif %}
+{% for checklist_id in card.idChecklists %}
+{% assign checklist = checklists | where:'id',checklist_id %}
+{% assign checklist = checklist.first %}
+{{ checklist.name }}
+{% if checklist %}
+<ul>
+  {% for item in checklist.checkItems %}
+  <li>{{item.name}}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endfor %}
+{% for attachment in card.attachments %}
+<p>
+  <img src='{{ attachment.previews.last.url }}' />
+</p>
+{% endfor %}

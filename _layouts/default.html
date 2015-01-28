@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+  {% include head.html %}
+
+  <body>
+
+    {% include header.html %}
+
+    <div class="page-content">
+      <div class="wrapper">
+
+
+        {% assign lists = site.data.board.lists | where:'closed',false %}
+        {% assign cards = site.data.board.cards %}
+        {% assign checklists = site.data.board.checklists %}
+
+        {% for list in lists %}
+
+        <h6>{{site.data.board.dateLastActivity}}</h6>
+        <h1>{{ list.name }}</h1>
+        {% assign mycards = cards | where:'idList',list.id %}
+        {% for card in mycards %}
+        {% include card.html %}
+        {% endfor %}
+        {% endfor %}
+
+
+        {{ content }}
+      </div>
+    </div>
+
+    {% include footer.html %}
+
+  </body>
+
+</html>
