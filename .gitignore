@@ -1,3 +1,4 @@
 _site
 .sass-cache
 _data/board.json
+_data/filtered.json
